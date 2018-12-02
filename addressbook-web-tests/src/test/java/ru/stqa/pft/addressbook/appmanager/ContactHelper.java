@@ -18,10 +18,21 @@ public class ContactHelper extends HelperBase {
         type(By.name("nickname"), contactData.getNname());
         type(By.name("mobile"), contactData.getPhoneNumber());
         type(By.name("email"), contactData.getEmail());
-        click(By.xpath("(//input[@name='submit'])[2]"));
     }
 
     public void initContactCreation() {
       click(By.linkText("add new"));
+    }
+
+    public void initContactModification() {
+        click(By.cssSelector("img[alt=\"Edit\"]"));
+    }
+
+    public void submitContactModification() {
+        click(By.name("update"));
+    }
+
+    public void submitContactCreation() {
+        click(By.name("submit"));
     }
 }
