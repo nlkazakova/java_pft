@@ -13,7 +13,7 @@ public class ContactData {
     private String group;
 
     public ContactData(String fname, String mname, String lname, String nname, String phoneNumber, String email, String group) {
-        this.id = 0;
+        this.id = Integer.MAX_VALUE;
         this.fname = fname;
         this.mname = mname;
         this.lname = lname;
@@ -25,23 +25,6 @@ public class ContactData {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ContactData that = (ContactData) o;
-        return id == that.id &&
-                Objects.equals(fname, that.fname) &&
-                Objects.equals(lname, that.lname) &&
-                Objects.equals(phoneNumber, that.phoneNumber) &&
-                Objects.equals(email, that.email);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, fname, lname, phoneNumber, email);
     }
 
     public ContactData(int id, String lname, String fname, String email, String phoneNumber) {
@@ -98,5 +81,20 @@ public class ContactData {
                 ", email='" + email + '\'' +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ContactData that = (ContactData) o;
+        return Objects.equals(fname, that.fname) &&
+                Objects.equals(lname, that.lname);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(fname, lname);
+    }
+
 
 }
