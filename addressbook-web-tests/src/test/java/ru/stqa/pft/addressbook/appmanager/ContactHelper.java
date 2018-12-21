@@ -76,11 +76,12 @@ public class ContactHelper extends HelperBase {
         List<WebElement> tableRows = wd.findElements(By.cssSelector("tr[name='entry']"));
         for (WebElement row : tableRows) {
             List<WebElement> cells = row.findElements(By.tagName("td"));
+                int id = Integer.parseInt(cells.get(0).findElement(By.tagName("input")).getAttribute("value"));
                 String lastname = cells.get(1).getText();
                 String firstname = cells.get(2).getText();
                 String email = cells.get(4).getText();
                 String phone = cells.get(5).getText();
-                ContactData contact = new ContactData(lastname, firstname, email, phone);
+                ContactData contact = new ContactData(id, lastname, firstname, email, phone);
                 contacts.add(contact);
             }
         return contacts;

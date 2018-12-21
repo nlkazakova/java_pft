@@ -1,6 +1,9 @@
 package ru.stqa.pft.addressbook.model;
 
+import java.util.Objects;
+
 public class ContactData {
+    private int id;
     private final String fname;
     private final String mname;
     private final String lname;
@@ -10,6 +13,7 @@ public class ContactData {
     private String group;
 
     public ContactData(String fname, String mname, String lname, String nname, String phoneNumber, String email, String group) {
+        this.id = 0;
         this.fname = fname;
         this.mname = mname;
         this.lname = lname;
@@ -19,7 +23,29 @@ public class ContactData {
         this.group = group;
     }
 
-    public ContactData(String lname, String fname, String email, String phoneNumber) {
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ContactData that = (ContactData) o;
+        return id == that.id &&
+                Objects.equals(fname, that.fname) &&
+                Objects.equals(lname, that.lname) &&
+                Objects.equals(phoneNumber, that.phoneNumber) &&
+                Objects.equals(email, that.email);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, fname, lname, phoneNumber, email);
+    }
+
+    public ContactData(int id, String lname, String fname, String email, String phoneNumber) {
+        this.id = id;
         this.fname = fname;
         this.mname = null;
         this.lname = lname;
@@ -27,6 +53,11 @@ public class ContactData {
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.group = null;
+    }
+
+
+    public int getId() {
+        return id;
     }
 
     public String getFname() {
@@ -56,4 +87,16 @@ public class ContactData {
     public String getGroup() {
         return group;
     }
+
+    @Override
+    public String toString() {
+        return "ContactData{" +
+                "id='" + id + '\'' +
+                ", fname='" + fname + '\'' +
+                ", lname='" + lname + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", email='" + email + '\'' +
+                '}';
+    }
+
 }
