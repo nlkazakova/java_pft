@@ -36,9 +36,6 @@ public class ContactHelper extends HelperBase {
       click(By.linkText("add new"));
     }
 
-    public void initContactModification() {
-        click(By.cssSelector("img[alt=\"Edit\"]"));
-    }
 
     public void submitContactModification() {
         click(By.name("update"));
@@ -50,6 +47,10 @@ public class ContactHelper extends HelperBase {
 
     public void selectContact(int index) {
         wd.findElements(By.name("selected[]")).get(index).click();
+    }
+
+    public void initContactModification(int index) {
+        wd.findElements(By.cssSelector("img[alt=\"Edit\"]")).get(index).click();
     }
 
     public void deleteSelectedContact() {
