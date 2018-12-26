@@ -32,10 +32,9 @@ public class ContactHelper extends HelperBase {
         }
     }
 
-    public void initContactCreation() {
+    public void addNew() {
       click(By.linkText("add new"));
     }
-
 
     public void submitContactModification() {
         click(By.name("update"));
@@ -58,10 +57,24 @@ public class ContactHelper extends HelperBase {
         wd.switchTo().alert().accept();
     }
 
-    public void createContact(ContactData contactData) {
-        initContactCreation();
+    public void create(ContactData contactData) {
+        addNew();
         fillContactForm(contactData, true);
         submitContactCreation();
+        wd.findElement(By.cssSelector("img[alt=\"Addressbook\"]")).click();
+    }
+
+    public void modify(int index, ContactData contact) {
+        selectContact(index);
+        initContactModification(index);
+        fillContactForm(contact, false);
+        submitContactModification();
+
+    }
+    public void delete(int index) {
+        selectContact(index);
+        deleteSelectedContact();
+        wd.findElement(By.cssSelector("img[alt=\"Addressbook\"]")).click();
     }
 
     public boolean isThereAContact() {
@@ -72,7 +85,7 @@ public class ContactHelper extends HelperBase {
         return wd.findElements(By.name("selected[]")).size();
     }
 
-    public List<ContactData> getContactList() {
+    public List<ContactData> list() {
         List<ContactData> contacts = new ArrayList<ContactData>();
         List<WebElement> tableRows = wd.findElements(By.cssSelector("tr[name='entry']"));
         for (WebElement row : tableRows) {

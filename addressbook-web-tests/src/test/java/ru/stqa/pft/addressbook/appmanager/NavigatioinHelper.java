@@ -18,10 +18,10 @@ public class NavigatioinHelper extends HelperBase {
         click(By.linkText("groups"));
     }
 
-    public void returnToHomePage() {
+    public void HomePage() {
         if (isElementPresent(By.id("maintable"))){
             return;
         }
-        click(By.linkText("home"));
+        wd.findElement(By.cssSelector("img[alt=\"Addressbook\"]")).click();
     }
 }
