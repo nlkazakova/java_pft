@@ -19,7 +19,7 @@ public class ContactDeletionTests extends TestBase {
                 app.group().creste(new GroupData().withName("test1"));
             }
             app.contact().addNew();
-            app.contact().create(new ContactData("Natalia", "Leonidovna", "Kazakova", "nlkazakova", "+79166752495", "nlkazakova9@gmail.com", "null"));
+            app.contact().create(new ContactData().withFname("Natalia").withMname("Leonidovna").withLname("Kazakova").withNname("nlkazakova").withPhoneNumber("+79166752495").withEmail("nlkazakova9@gmail.com"));
         }
     }
     @Test

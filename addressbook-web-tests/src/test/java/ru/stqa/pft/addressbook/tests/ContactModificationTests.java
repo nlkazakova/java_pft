@@ -20,7 +20,7 @@ public class ContactModificationTests extends TestBase {
                 app.group().creste(new GroupData().withName("test1"));
             }
             app.contact().addNew();
-            app.contact().create(new ContactData("Natalia", "Leonidovna", "Kazakova", "nlkazakova", "+79166752495", "nlkazakova9@gmail.com", "null"));
+            app.contact().create(new ContactData().withFname("Natalia").withMname("Leonidovna").withLname("Kazakova").withNname("nlkazakova").withPhoneNumber("+79166752495").withEmail("nlkazakova9@gmail.com"));
         }
     }
 
@@ -28,7 +28,7 @@ public class ContactModificationTests extends TestBase {
     public void testContactModification() {
         List<ContactData> before = app.contact().list();
         int index = before.size() - 1;
-        ContactData contact = new ContactData(before.get(index).getId(), "Kazakova", "Natalia", "nlkazakova9@gmail.com", "+79166752495");
+        ContactData contact = new ContactData().withId(before.get(index).getId()).withFname("Natalia").withMname("Leonidovna").withLname("Kazakova").withNname("nlkazakova").withPhoneNumber("+79166752495").withEmail("nlkazakova9@gmail.com");
         app.contact().modify(index, contact);
         app.goTo().HomePage();
         List<ContactData> after = app.contact().list();
