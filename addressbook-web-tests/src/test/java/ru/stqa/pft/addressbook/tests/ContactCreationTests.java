@@ -15,7 +15,7 @@ public class ContactCreationTests extends TestBase {
   public void ensurePreconditions() {
     app.goTo().GroupPage();
     if (app.group().all().size() == 0) {
-      app.group().creste(new GroupData().withName("test1"));
+      app.group().create(new GroupData().withName("test1"));
     }
     app.goTo().HomePage();
   }
@@ -23,7 +23,7 @@ public class ContactCreationTests extends TestBase {
   @Test
   public void testContactCreation() throws Exception {
     Contacts before = app.contact().all();
-    ContactData contact = new ContactData().withFname("Natalia").withMname("Leonidovna").withLname("Kazakova").withNname("nlkazakova").withPhoneNumber("+79166752495").withEmail("nlkazakova9@gmail.com").withGroup("test1");
+    ContactData contact = new ContactData().withFname("Natalia").withLname("Kazakova").withGroup("test1");
     app.contact().addNew();
     app.contact().create(contact);
     Contacts after = app.contact().all();
