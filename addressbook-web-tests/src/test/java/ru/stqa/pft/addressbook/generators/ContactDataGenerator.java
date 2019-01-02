@@ -51,7 +51,8 @@ public class ContactDataGenerator {
         List<ContactData> contacts = new ArrayList<ContactData>();
         for (int i = 0; i < count; i++) {
             contacts.add(new ContactData().withFname("Natalia").withLname("Kazakova").withGroup("test1")
-                    .withMobilePhone(String.format("+791667524%s", i)).withEmail(String.format("nlkazakova%s@gmail.com",i)));
+                    .withMobilePhone(String.format("+791667524%s", i))
+                    .withEmail(String.format("nlkazakova%s@gmail.com",i)).withAddress("г. Москва, ул. Ленинская слобода, д.19"));
         }
         return contacts;
     }
