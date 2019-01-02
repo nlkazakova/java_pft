@@ -33,7 +33,7 @@ public class GroupCreationTests extends TestBase {
     List<GroupData> groups = (List<GroupData>) xStream.fromXML(xml);
     return groups.stream().map((g) -> new Object[] {g}).collect(Collectors.toList()).iterator();
   }
-  
+
   @DataProvider
   public Iterator<Object[]> validGroupsFromJson() throws IOException {
     BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/groups.json")));
