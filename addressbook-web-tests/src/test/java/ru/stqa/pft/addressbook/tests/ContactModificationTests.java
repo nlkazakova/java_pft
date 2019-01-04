@@ -5,6 +5,7 @@ import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.GroupData;
+import ru.stqa.pft.addressbook.model.Groups;
 
 import java.io.File;
 
@@ -31,10 +32,12 @@ public class ContactModificationTests extends TestBase {
     @Test
     public void testContactModification() {
         Contacts before = app.db().contacts();
+        Groups groups = app.db().groups();
         ContactData modifiedContact = before.iterator().next();
         ContactData contact = new ContactData().withId(modifiedContact.getId()).withFname("Natalia")
                 .withLname("Kazakova").withPhoto(new File("src/test/resources/pp_my.jpg"))
-                .withMobilePhone("12345678").withEmail("nlkazakova9@gmail.com").withAddress("г. Москва, Красная площадь, д.1");
+                .withMobilePhone("12345678").withEmail("nlkazakova9@gmail.com")
+                .withAddress("г. Москва, Красная площадь, д.1").inGroup(groups.iterator().next());
         app.contact().modify(contact);
         app.goTo().HomePage();
         Contacts after = app.db().contacts();

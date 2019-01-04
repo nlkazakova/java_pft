@@ -5,7 +5,9 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.io.File;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "addressbook")
@@ -21,10 +23,6 @@ public class ContactData {
     @Expose
     @Column(name = "lastname")
     private String lname;
-
-    @Expose
-    @Transient
-    private String group;
 
     @Expose
     @Column(name = "home")
@@ -69,6 +67,14 @@ public class ContactData {
 
     @Transient
     private String photo;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "address_in_groups", joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "group_id"))
+    private Set<GroupData> groups = new HashSet<GroupData>();
+
+    public Groups getGroups() {
+        return new Groups(groups);
+    }
 
     public File getPhoto() {
         return new File(photo);
@@ -157,10 +163,6 @@ public class ContactData {
         return workPhone;
     }
 
-    public String getGroup() {
-        return group;
-    }
-
     public ContactData withId(int id) {
         this.id = id;
         return this;
@@ -191,11 +193,6 @@ public class ContactData {
         return this;
     }
 
-    public ContactData withGroup(String group) {
-        this.group = group;
-        return this;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -210,12 +207,13 @@ public class ContactData {
                 Objects.equals(address, that.address) &&
                 Objects.equals(email, that.email) &&
                 Objects.equals(email2, that.email2) &&
-                Objects.equals(email3, that.email3);
+                Objects.equals(email3, that.email3) &&
+                Objects.equals(groups, that.groups);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, fname, lname, homePhone, mobilePhone, workPhone, address, email, email2, email3);
+        return Objects.hash(id, fname, lname, homePhone, mobilePhone, workPhone, address, email, email2, email3, groups);
     }
 
     @Override
@@ -224,7 +222,6 @@ public class ContactData {
                 "id=" + id +
                 ", fname='" + fname + '\'' +
                 ", lname='" + lname + '\'' +
-                ", group='" + group + '\'' +
                 ", homePhone='" + homePhone + '\'' +
                 ", mobilePhone='" + mobilePhone + '\'' +
                 ", workPhone='" + workPhone + '\'' +
@@ -232,7 +229,13 @@ public class ContactData {
                 ", email='" + email + '\'' +
                 ", email2='" + email2 + '\'' +
                 ", email3='" + email3 + '\'' +
+                ", groups=" + groups +
                 '}';
+    }
+
+    public ContactData inGroup(GroupData group) {
+        groups.add(group);
+        return this;
     }
 
 }

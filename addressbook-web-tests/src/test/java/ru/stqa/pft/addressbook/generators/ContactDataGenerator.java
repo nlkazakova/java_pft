@@ -50,7 +50,7 @@ public class ContactDataGenerator {
     private List<ContactData> generateContacts(int count) {
         List<ContactData> contacts = new ArrayList<ContactData>();
         for (int i = 0; i < count; i++) {
-            contacts.add(new ContactData().withFname("Natalia").withLname("Kazakova").withGroup("test1")
+            contacts.add(new ContactData().withFname("Natalia").withLname("Kazakova")
                     .withMobilePhone(String.format("+791667524%s", i))
                     .withEmail(String.format("nlkazakova%s@gmail.com",i)).withAddress("г. Москва, ул. Ленинская слобода, д.19"));
         }
