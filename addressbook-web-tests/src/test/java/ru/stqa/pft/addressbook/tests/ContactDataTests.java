@@ -15,12 +15,12 @@ public class ContactDataTests extends TestBase {
 
     @BeforeMethod
     public void ensurePreconditions() {
-        app.goTo().HomePage();
-        if (app.contact().all().size() == 0) {
-            app.goTo().GroupPage();
-            if (app.group().all().size() == 0) {
+        if (app.db().contacts().size() == 0) {
+            if (app.db().groups().size() == 0) {
+                app.goTo().GroupPage();
                 app.group().create(new GroupData().withName("test1"));
             }
+            app.goTo().HomePage();
             app.contact().addNew();
             app.contact().create(new ContactData().withFname("Natalia").withLname("Kazakova"));
         }
@@ -29,11 +29,9 @@ public class ContactDataTests extends TestBase {
     public void testContactData() {
         ContactData contact = app.contact().all().iterator().next();
         ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
-
         assertThat(contact.getAllPhones(), equalTo(mergePhones(contactInfoFromEditForm)));
         assertThat(contact.getAddress(), equalTo(contactInfoFromEditForm.getAddress()));
         assertThat(contact.getAllEmails(), equalTo(mergeEmails(contactInfoFromEditForm)));
-
     }
 
     private String mergeEmails(ContactData contact) {

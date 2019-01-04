@@ -37,8 +37,8 @@ public class ContactCreationTests extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
-    app.goTo().GroupPage();
-    if (app.group().all().size() == 0) {
+    if (app.db().groups().size() == 0) {
+      app.goTo().GroupPage();
       app.group().create(new GroupData().withName("test1"));
     }
     app.goTo().HomePage();
@@ -46,12 +46,12 @@ public class ContactCreationTests extends TestBase {
 
   @Test(dataProvider = "validContacts")
   public void testContactCreation(ContactData contact) throws Exception {
-    Contacts before = app.contact().all();
+    Contacts before = app.db().contacts();
     contact.withPhoto(new File("src/test/resources/pp_my.jpg"));
     app.contact().addNew();
     app.contact().create(contact);
-    Contacts after = app.contact().all();
-    assertThat(after.size(), equalTo(before.size() + 1));
+    Contacts after = app.db().contacts();
+    assertThat(app.contact().count(), equalTo(before.size() + 1));
 
     assertThat(after, equalTo(
             before.withAdded(contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
