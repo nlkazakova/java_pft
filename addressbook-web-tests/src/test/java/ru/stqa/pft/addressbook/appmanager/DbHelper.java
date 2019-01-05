@@ -11,6 +11,7 @@ import ru.stqa.pft.addressbook.model.GroupData;
 import ru.stqa.pft.addressbook.model.Groups;
 
 import java.util.List;
+import java.util.Set;
 
 public class DbHelper {
 
@@ -37,6 +38,17 @@ public class DbHelper {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
         List result = session.createQuery( "from ContactData where deprecated = '0000-00-00 00:00:00'" ).list();
+        session.getTransaction().commit();
+        session.close();
+        return new Contacts(result);
+    }
+
+    public Contacts contactsInGroup(GroupData group) {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        List result = session.createQuery( "select c from ContactData c join c.groups g where g.name = :group_name and c.id in " +
+                "(select c2.id from ContactData c2 where deprecated = '0000-00-00 00:00:00')")
+                .setParameter("group_name", group.getName()).list();
         session.getTransaction().commit();
         session.close();
         return new Contacts(result);
