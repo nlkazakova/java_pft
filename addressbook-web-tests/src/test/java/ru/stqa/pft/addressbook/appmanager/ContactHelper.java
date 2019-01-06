@@ -88,6 +88,12 @@ public class ContactHelper extends HelperBase {
         goToContactGroup(group);
     }
 
+    public void removeFromGroup(GroupData selectedGroup, ContactData selectedContact) {
+        selectContactById(selectedContact.getId());
+        removeContactFromGroup(selectedGroup);
+        goToContactGroup(selectedGroup);
+    }
+
     public boolean isThereAContact() {
         return isElementPresent(By.name("selected[]"));
     }
@@ -141,6 +147,10 @@ public class ContactHelper extends HelperBase {
 
     public void goToContactGroup(GroupData group) {
         click(By.linkText("group page \"" + group.getName() + "\""));
+    }
+
+    public void removeContactFromGroup(GroupData group) {
+        click(By.cssSelector("input[name='remove']"));
     }
 }
 

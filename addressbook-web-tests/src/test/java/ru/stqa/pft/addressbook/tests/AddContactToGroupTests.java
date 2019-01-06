@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.testng.Assert.assertEquals;
 
 public class AddContactToGroupTests extends TestBase {
 
@@ -48,7 +49,11 @@ public class AddContactToGroupTests extends TestBase {
                 logger.info("Контакт " + contact.getFname() + " добавлен в группу " + mappedGroup.getName());
 
                 Contacts after = app.db().contactsInGroup(mappedGroup);
+
+                assertThat(app.contact().count(), equalTo(before.size() + 1));
                 assertThat(after, equalTo(before.withAdded(contact.inGroup(mappedGroup))));
+
+                verifyContactsInGroupUI(mappedGroup);
                 return;
             }
         }

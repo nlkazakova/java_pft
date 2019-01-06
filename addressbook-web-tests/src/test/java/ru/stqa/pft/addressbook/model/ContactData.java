@@ -237,5 +237,11 @@ public class ContactData {
         groups.add(group);
         return this;
     }
+    public ContactData inGroups(Groups groups) {
+        for (GroupData group: groups) {
+            groups.add(group);
+        }
+        return this;
+    }
 
 }
