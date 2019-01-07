@@ -26,7 +26,7 @@ public class AddContactToGroupTests extends TestBase {
             }
             app.goTo().HomePage();
             app.contact().addNew();
-            app.contact().create(new ContactData().withFname("Natalia").withLname("Kazakova").withPhoto(new File("src/test/resources/pp_my.jpg")).inGroup(app.db().groups().iterator().next()));
+            app.contact().create(new ContactData().withFname("Natalia").withLname("Kazakova").withAddress("г. Москва, Ленинский проспект, д.42, кв.45").withMobilePhone("+700000001").withEmail("test@test.test").withPhoto(new File("src/test/resources/pp_my.jpg")).inGroup(app.db().groups().iterator().next()));
         }
     }
     @Test
