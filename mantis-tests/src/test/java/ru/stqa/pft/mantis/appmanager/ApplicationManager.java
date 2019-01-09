@@ -22,6 +22,7 @@ public class ApplicationManager {
     private FtpHelper ftp;
     private MailHelper mailHelper;
     private JamesHelper jamesHelper;
+    private AdminHelper adminHelper;
 
     public ApplicationManager(String browser) {
         this.browser = browser;
@@ -74,6 +75,13 @@ public class ApplicationManager {
             jamesHelper = new JamesHelper(this);
         }
         return jamesHelper;
+    }
+
+    public AdminHelper admin() {
+        if (adminHelper == null) {
+            adminHelper = new AdminHelper(this);
+        }
+        return adminHelper;
     }
 
     public WebDriver getDriver() {
