@@ -1,6 +1,5 @@
 package ru.stqa.pft.sandbox;
 
-import com.sun.source.tree.AssertTree;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
