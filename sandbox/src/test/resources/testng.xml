@@ -4,7 +4,6 @@
     <test name="all">
         <classes>
             <class name="ru.stqa.pft.sandbox.EquationTests"/>
-            <class name="ru.stqa.pft.sandbox.PointTests"/>
         </classes>
     </test>
 </suite>
