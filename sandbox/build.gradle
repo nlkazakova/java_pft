@@ -10,8 +10,6 @@ dependencies {
     compile 'com.slickqa:testng:7.0.0-7'
 }
 
-task sandboxTests(type: Test) { 
-    useTestNG() {
-        suites 'src/test/resources/testng.xml'
-    }
+test {
+    useTestNG()
 }

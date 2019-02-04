@@ -10,7 +10,7 @@ public class PointTests {
     public void testDistanceIntRight(){
         Point p1 = new Point(1000,100);
         Point p2 = new Point(2000,100);
-        Assert.assertEquals(p1.distance(p2), 100.0);
+        Assert.assertEquals(p1.distance(p2), 1000.0);
     }
 
     @Test
