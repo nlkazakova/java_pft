@@ -21,7 +21,7 @@ public class GroupModificationTests extends TestBase {
 
     @Test
     public void testGroupModification() {
-        skipIfNotFixed(700);
+//        skipIfNotFixed(700);
         Groups before = app.db().groups();
         GroupData modifiedGroup = before.iterator().next();
         GroupData group = new GroupData()
